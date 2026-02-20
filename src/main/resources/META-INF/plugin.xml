@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+    <id>com.testgen.junit-generator</id>
+    <name>JUnit Test Generator</name>
+    <vendor email="your@email.com" url="https://github.com/yourname/junit-generator">YourName</vendor>
+
+    <description><![CDATA[
+        <b>Auto-generate JUnit 5 + Mockito test cases from any Java service class.</b>
+        <br/><br/>
+        <ul>
+            <li>Detects all injected dependencies and creates @Mock fields automatically</li>
+            <li>Generates @InjectMocks setup with @BeforeEach</li>
+            <li>Creates test methods for every public method with arrange/act/assert structure</li>
+            <li>Handles void methods, return types, and exception scenarios</li>
+            <li>Places test file in correct src/test/java package automatically</li>
+        </ul>
+        <br/>
+        <b>Usage:</b> Open any Java service class → Press <b>Alt+Shift+T</b> (or use Code menu → Generate JUnit Tests)
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Settings page -->
+        <applicationService
+            serviceImplementation="com.testgen.plugin.settings.TestGeneratorSettings"/>
+        <applicationConfigurable
+            parentId="tools"
+            instance="com.testgen.plugin.settings.TestGeneratorConfigurable"
+            id="com.testgen.plugin.settings"
+            displayName="JUnit Test Generator"/>
+    </extensions>
+
+    <actions>
+        <!-- Main action: Alt+Shift+T -->
+        <action id="com.testgen.plugin.GenerateTestsAction"
+                class="com.testgen.plugin.actions.GenerateTestsAction"
+                text="Generate JUnit Tests"
+                description="Generate JUnit 5 + Mockito test class for this service"
+                icon="/icons/testgen.svg">
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift T"/>
+        </action>
+    </actions>
+</idea-plugin>
