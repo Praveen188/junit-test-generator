@@ -134,7 +134,7 @@ public class PsiClassAnalyzer {
 
     private String getReturnTypeString(PsiMethod method) {
         PsiType returnType = method.getReturnType();
-        if (returnType == null || returnType.equals(PsiType.VOID)) return "void";
+        if (returnType == null || PsiTypes.voidType().equals(returnType)) return "void";
         return getSimpleTypeName(returnType);
     }
 
