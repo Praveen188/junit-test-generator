@@ -22,6 +22,11 @@
     <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <!-- Notification group -->
+        <notificationGroup id="JUnit Test Generator"
+                           displayType="BALLOON"
+                           isLogByDefault="true"/>
+
         <!-- Settings page -->
         <applicationService
             serviceImplementation="com.testgen.plugin.settings.TestGeneratorSettings"/>

@@ -29,7 +29,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("233")
-        untilBuild.set("242.*")
+        untilBuild.set("261.*")
         changeNotes.set("""
             <ul>
                 <li>1.0.0 — Initial release: auto-generate JUnit 5 + Mockito tests from any Java service class</li>

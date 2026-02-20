@@ -28,9 +28,7 @@ import java.util.List;
  */
 public class GenerateTestsAction extends AnAction {
 
-    private static final NotificationGroup NOTIF_GROUP =
-        NotificationGroupManager.getInstance()
-            .getNotificationGroup("JUnit Test Generator");
+    private static final String NOTIFICATION_GROUP_ID = "JUnit Test Generator";
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -136,18 +134,22 @@ public class GenerateTestsAction extends AnAction {
     // ── Notifications ─────────────────────────────────────────────────────
 
     private void notifySuccess(Project project, String message) {
-        NOTIF_GROUP.createNotification(
-            "✅ JUnit Tests Generated",
-            message,
-            NotificationType.INFORMATION
-        ).notify(project);
+        Notifications.Bus.notify(
+            new Notification(
+                NOTIFICATION_GROUP_ID,
+                "✅ JUnit Tests Generated",
+                message,
+                NotificationType.INFORMATION
+            ), project);
     }
 
     private void notifyError(Project project, String message) {
-        NOTIF_GROUP.createNotification(
-            "⚠️ JUnit Generator",
-            message,
-            NotificationType.WARNING
-        ).notify(project);
+        Notifications.Bus.notify(
+            new Notification(
+                NOTIFICATION_GROUP_ID,
+                "⚠️ JUnit Generator",
+                message,
+                NotificationType.WARNING
+            ), project);
     }
 }
